@@ -1,0 +1,55 @@
+<zk>
+    <window apply="org.zkoss.bind.BindComposer"
+            viewModel="@id('vm')@init('isv.UserAddressViewModel')"
+            validationMessages="@id('vmsgs')" width="1200px" vflex="1">
+
+        <hlayout spacing="0" height="400px" width="100%">
+            <listbox sclass="user-list" vflex="true" hflex="1"
+                     model="@load(vm.userListModelList)" selectedItem="@bind(vm.selectedUser)" >
+                <auxhead>
+                    <auxheader colspan="4" class="topic">Users</auxheader>
+                </auxhead>
+                <listhead>
+                    <listheader label="Last Name" align="center" />
+                    <listheader label="First Name" align="center" />
+                    <listheader label="Second Name" align="center" />
+                    <listheader label="Phone" width="80px" align="center" />
+                </listhead>
+                <template name="model" var="user">
+                    <listitem>
+                        <listcell label="@load(user.lastName)" />
+                        <listcell label="@load(user.firstName)" />
+                        <listcell label="@load(user.secondName)" />
+                        <listcell label="@load(user.phone)" />
+                    </listitem>
+                </template>
+
+            </listbox>
+
+            <listbox sclass="user-list" vflex="true" hflex="2"
+                     model="@load(vm.addressListModelList)" selectedItem="@bind(vm.selectedAddress)" >
+                <auxhead>
+                    <auxheader colspan="5" class="topic">Addresses</auxheader>
+                </auxhead>
+                <listhead>
+                    <listheader label="Zip" width="60px" align="center" />
+                    <listheader label="City" align="center" />
+                    <listheader label="Street" align="center" />
+                    <listheader label="House" width="60px" align="center" />
+                    <listheader label="Flat" width="60px" align="center" />
+                </listhead>
+                <template name="model" var="address">
+                    <listitem>
+                        <listcell label="@load(address.zipCode)" />
+                        <listcell label="@load(address.city.name)" />
+                        <listcell label="@load(address.street.name)" />
+                        <listcell label="@load(address.house)" />
+                        <listcell label="@load(address.flat)" />
+                    </listitem>
+                </template>
+
+            </listbox>
+        </hlayout>
+
+    </window>
+</zk>
