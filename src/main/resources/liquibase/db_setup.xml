@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+
+    <changeSet id="1" author="isv">
+
+        <createTable tableName="city">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="street">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="city_id" type="int">
+                <constraints nullable="false" foreignKeyName="street_city_xref" referencedTableName="city"
+                             referencedColumnNames="id"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="ha_user">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="last_name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="second_name" type="varchar(50)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="phone" type="varchar(20)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        
+        <createTable tableName="address">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="int">
+                <constraints nullable="false" foreignKeyName="address_user_xref" referencedTableName="ha_user" 
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="city_id" type="int">
+                <constraints nullable="false" foreignKeyName="address_city_xref" referencedTableName="city"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="street_id" type="int">
+                <constraints nullable="false" foreignKeyName="address_street_xref" referencedTableName="street"
+                             referencedColumnNames="id"/>
+            </column>
+            <column name="house" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="flat" type="varchar(10)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="zip_code" type="varchar(15)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="isv">
+        <insert tableName="city">
+            <column name="name">Moscow</column>
+        </insert>
+        <insert tableName="city">
+            <column name="name">Saint-Petersburg</column>
+        </insert>
+        <insert tableName="city">
+            <column name="name">Ulan-Ude</column>
+        </insert>
+
+        <insert tableName="street">
+            <column name="name">Lenina</column>
+            <column name="city_id">1</column>
+        </insert>
+        <insert tableName="street">
+            <column name="name">Vereschagina</column>
+            <column name="city_id">1</column>
+        </insert>
+        <insert tableName="street">
+            <column name="name">Vetkina</column>
+            <column name="city_id">1</column>
+        </insert>
+
+        <insert tableName="street">
+            <column name="name">Afonskaya</column>
+            <column name="city_id">2</column>
+        </insert>
+        <insert tableName="street">
+            <column name="name">Pinegina</column>
+            <column name="city_id">2</column>
+        </insert>
+
+        <insert tableName="street">
+            <column name="name">Tereshkovoi</column>
+            <column name="city_id">3</column>
+        </insert>
+        <insert tableName="street">
+            <column name="name">Banzarova</column>
+            <column name="city_id">3</column>
+        </insert>
+        <insert tableName="street">
+            <column name="name">Krasnoyarskaya</column>
+            <column name="city_id">3</column>
+        </insert>
+
+        <insert tableName="ha_user">
+            <column name="first_name">Jack</column>
+            <column name="last_name">Torrance</column>
+            <column name="phone">555-12-34</column>
+        </insert>
+        <insert tableName="ha_user">
+            <column name="first_name">Delbert</column>
+            <column name="last_name">Grady</column>
+            <column name="phone">555-12-35</column>
+        </insert>
+        <insert tableName="ha_user">
+            <column name="first_name">Ace</column>
+            <column name="last_name">Ventura</column>
+            <column name="phone">555-93-96</column>
+        </insert>
+
+        <insert tableName="address">
+            <column name="user_id">1</column>
+            <column name="city_id">1</column>
+            <column name="street_id">1</column>
+            <column name="house">123</column>
+            <column name="zip_code">344007</column>
+        </insert>
+        <insert tableName="address">
+            <column name="user_id">1</column>
+            <column name="city_id">1</column>
+            <column name="street_id">2</column>
+            <column name="house">36</column>
+        </insert>
+
+        <insert tableName="address">
+            <column name="user_id">2</column>
+            <column name="city_id">2</column>
+            <column name="street_id">4</column>
+            <column name="house">18</column>
+            <column name="zip_code">347360</column>
+        </insert>
+
+        <insert tableName="address">
+            <column name="user_id">3</column>
+            <column name="city_id">3</column>
+            <column name="street_id">6</column>
+            <column name="house">24</column>
+            <column name="flat">40</column>
+            <column name="zip_code">630010</column>
+        </insert>
+        <insert tableName="address">
+            <column name="user_id">3</column>
+            <column name="city_id">3</column>
+            <column name="street_id">7</column>
+            <column name="house">14</column>
+            <column name="zip_code">630012</column>
+        </insert>
+        <insert tableName="address">
+            <column name="user_id">3</column>
+            <column name="city_id">3</column>
+            <column name="street_id">8</column>
+            <column name="house">11</column>
+            <column name="zip_code">630011</column>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
