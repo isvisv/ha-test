@@ -12,6 +12,8 @@ import java.io.Serializable;
 @Entity
 public class Street extends IdentifiableEntity implements Serializable {
 
+    private static final long serialVersionUID = 4L;
+
     /**
      * <p>A <code>String</code> providing the value for Name property.</p>
      */

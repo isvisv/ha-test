@@ -12,6 +12,8 @@ import java.io.Serializable;
 @Entity
 public class Address extends IdentifiableEntity implements Serializable {
 
+    private static final long serialVersionUID = 2L;
+
     /**
      * <p>A <code>Long</code> providing the value for UserId property.</p>
      */
@@ -21,14 +23,14 @@ public class Address extends IdentifiableEntity implements Serializable {
     /**
      * <p>A <code>City</code> providing the value for City property.</p>
      */
-    @ManyToOne(optional=false)
+    @ManyToOne(optional = false)
     @JoinColumn(name="city_id", nullable=false, updatable=false)
     private City city;
 
     /**
      * <p>A <code>Street</code> providing the value for Street property.</p>
      */
-    @ManyToOne(optional=false)
+    @ManyToOne(optional = false)
     @JoinColumn(name="street_id", nullable=false, updatable=false)
     private Street street;
 

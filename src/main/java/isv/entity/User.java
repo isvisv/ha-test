@@ -13,6 +13,8 @@ import java.io.Serializable;
 @Table(name = "ha_user")
 public class User extends IdentifiableEntity implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     /**
      * <p>A <code>String</code> providing the value for FirstName property.</p>
      */
