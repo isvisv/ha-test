@@ -125,17 +125,17 @@
         <insert tableName="ha_user">
             <column name="first_name">Jack</column>
             <column name="last_name">Torrance</column>
-            <column name="phone">555-12-34</column>
+            <column name="phone">(745) 555-12-34</column>
         </insert>
         <insert tableName="ha_user">
             <column name="first_name">Delbert</column>
             <column name="last_name">Grady</column>
-            <column name="phone">555-12-35</column>
+            <column name="phone">(674) 555-12-35</column>
         </insert>
         <insert tableName="ha_user">
             <column name="first_name">Ace</column>
             <column name="last_name">Ventura</column>
-            <column name="phone">555-93-96</column>
+            <column name="phone">(388) 555-93-96</column>
         </insert>
 
         <insert tableName="address">

@@ -1,7 +1,6 @@
 package isv.services.impl;
 
 import isv.entity.IdentifiableEntity;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,7 +12,7 @@ import javax.persistence.PersistenceContext;
  * @author isv
  * @version 1.0
  */
-public abstract class AbstractDAO<T extends IdentifiableEntity> {
+abstract class AbstractDAO<T extends IdentifiableEntity> {
 
     /**
      * <p>An {@link EntityManager} to be used for accessing the persistent data store.</p>
@@ -50,7 +49,6 @@ public abstract class AbstractDAO<T extends IdentifiableEntity> {
      * @param id a {@link Long} providing ID referencing the entity.
      * @return an entity matching the specified ID or <code>null</code> if there is no such entity.
      */
-    @Transactional(readOnly = true)
     protected T get(Long id) {
         return em.find(entityClass, id);
     }
@@ -61,20 +59,18 @@ public abstract class AbstractDAO<T extends IdentifiableEntity> {
      * @param entity an entity to be updated.
      * @return updated entity.
      */
-    @Transactional
-    protected T save(T entity) {
+    protected T saveEntity(T entity) {
         em.persist(entity);
         em.flush();
         return entity;
     }
 
     /**
-     * <p>Delets the specified entity.</p>
+     * <p>Deletes the specified entity.</p>
      *
      * @param entity an entity to be deleted.
      */
-    @Transactional
-    protected void delete(T entity) {
+    protected void deleteEntity(T entity) {
         T r = get(entity.getId());
         if (r != null) {
             em.remove(r);

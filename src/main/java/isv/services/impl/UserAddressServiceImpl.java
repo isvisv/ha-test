@@ -61,4 +61,23 @@ public class UserAddressServiceImpl implements UserAddressService {
     public List<Address> getUserAddresses(Long userId) {
         return this.addressDAO.queryByUserId(userId);
     }
+
+    /**
+     * <p>Deletes specified user account.</p>
+     *
+     * @param user a {@link User} representing the user.
+     */
+    public void deleteUser(User user){
+        this.addressDAO.deleteByUserId(user.getId());
+        this.userDAO.delete(user);
+    }
+
+    /**
+     * <p>Deletes specified address.</p>
+     *
+     * @param address a {@link Address} representing the address.
+     */
+    public void deleteAddress(Address address) {
+        this.addressDAO.delete(address);
+    }
 }

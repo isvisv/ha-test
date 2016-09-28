@@ -27,4 +27,18 @@ public interface UserAddressService {
      * @return a {@link List} listing the addresses for user.
      */
     List<Address> getUserAddresses(Long userId);
+
+    /**
+     * <p>Deletes specified user account.</p>
+     *
+     * @param user a {@link User} representing the user.
+     */
+    void deleteUser(User user);
+
+    /**
+     * <p>Deletes specified address.</p>
+     *
+     * @param address a {@link Address} representing the address.
+     */
+    void deleteAddress(Address address);
 }

@@ -3,6 +3,8 @@ package isv;
 import isv.entity.Address;
 import isv.entity.User;
 import isv.services.UserAddressService;
+import org.zkoss.bind.annotation.BindingParam;
+import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
@@ -58,11 +60,7 @@ public class UserAddressViewModel {
      */
     @Init
     public void init() {
-        List<User> userList = userAddressService.getUsers();
-        userListModelList = new ListModelList<User>(userList);
-        if (!userList.isEmpty()) {
-            setSelectedUser(userList.get(0));
-        }
+        loadData();
     }
 
     /**
@@ -115,13 +113,63 @@ public class UserAddressViewModel {
      *
      * @param selectedUser a {@link User} representing the currently selected user.
      */
+    @Command
     @NotifyChange("addressListModelList")
     public void setSelectedUser(User selectedUser) {
         this.selectedUser = selectedUser;
-        List<Address> userAddresses = userAddressService.getUserAddresses(selectedUser.getId());
-        this.addressListModelList = new ListModelList<Address>(userAddresses);
-        if (!userAddresses.isEmpty()) {
-            setSelectedAddress(userAddresses.get(0));
+        loadSelectedUserAddresses();
+    }
+
+    /**
+     * <p>Deletes specified user account</p>
+     *
+     * @param user a {@link User} representing the user account to be deleted.
+     */
+    @Command
+    @NotifyChange({"userListModelList", "addressListModelList"})
+    public void deleteUser(@BindingParam("user") User user) {
+        userAddressService.deleteUser(user);
+        loadData();
+    }
+
+    /**
+     * <p>Deletes specified address</p>
+     *
+     * @param address a {@link Address} representing the address to be deleted.
+     */
+    @Command
+    @NotifyChange("addressListModelList")
+    public void deleteAddress(@BindingParam("address") Address address) {
+        userAddressService.deleteAddress(address);
+        loadSelectedUserAddresses();
+    }
+
+    /**
+     * <p>Loads the data for this view model. Gets the list of user accounts and sets the first one as selected.</p>
+     */
+    private void loadData() {
+        List<User> userList = userAddressService.getUsers();
+        userListModelList = new ListModelList<User>(userList);
+        if (!userList.isEmpty()) {
+            setSelectedUser(userList.get(0));
+        } else {
+            setSelectedUser(null);
+            setSelectedAddress(null);
+        }
+    }
+
+    /**
+     * <p>Loads the addresses for currently selected user.</p>
+     */
+    private void loadSelectedUserAddresses() {
+        if (selectedUser != null) {
+            List<Address> userAddresses = userAddressService.getUserAddresses(selectedUser.getId());
+            this.addressListModelList = new ListModelList<Address>(userAddresses);
+            if (!userAddresses.isEmpty()) {
+                setSelectedAddress(userAddresses.get(0));
+            }
+        } else {
+            this.addressListModelList = null;
         }
     }
 }

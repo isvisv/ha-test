@@ -36,4 +36,25 @@ public class UserDAO extends AbstractDAO<User> {
         Query query = em.createQuery("SELECT u FROM User u");
         return (List<User>) query.getResultList();
     }
+
+    /**
+     * <p>Updates the specified user account.</p>
+     *
+     * @param user an user account to be updated.
+     * @return updated user account.
+     */
+    @Transactional
+    public User save(User user) {
+        return saveEntity(user);
+    }
+
+    /**
+     * <p>Deletes the specified user account.</p>
+     *
+     * @param user an user account to be deleted.
+     */
+    @Transactional
+    public void delete(User user) {
+        deleteEntity(user);
+    }
 }
