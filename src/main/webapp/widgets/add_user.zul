@@ -1,0 +1,27 @@
+<window id="newUserWin" title="Add User" width="400px" border="normal"
+        apply="isv.NewUserController">
+    <grid>
+        <rows>
+            <row>
+                Last Name:
+                <textbox id="lastNameTextBox" value="${win$composer.newUser.lastName}"
+                         constraint="no empty" />
+            </row>
+            <row>
+                First Name:
+                <textbox id="firstNameTextBox" value="${win$composer.newUser.firstName}"
+                         constraint="no empty" />
+            </row>
+            <row>
+                Second Name:
+                <textbox id="secondNameTextBox" value="${win$composer.newUser.secondName}"/>
+            </row>
+            <row>
+                Phone:
+                <textbox id="phoneTextBox" value="${win$composer.newUser.phone}"/>
+            </row>
+        </rows>
+    </grid>
+    <button id="submitUserButton" label="Submit"/>
+    <button id="cancelUserButton" label="Cancel" />
+</window>

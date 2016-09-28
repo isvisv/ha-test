@@ -7,9 +7,11 @@ import org.zkoss.bind.annotation.BindingParam;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModelList;
+import org.zkoss.zul.Window;
 
 import java.util.List;
 
@@ -171,5 +173,15 @@ public class UserAddressViewModel {
         } else {
             this.addressListModelList = null;
         }
+    }
+
+    /**
+     * <p>Shows modal dialog for adding new user account.</p>
+     */
+    @Command
+    public void showAddUserDialog() {
+        String template = "/widgets/add_user.zul";
+        Window window = (Window) Executions.createComponents(template, null, null);
+        window.doModal();
     }
 }

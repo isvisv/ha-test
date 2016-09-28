@@ -80,4 +80,14 @@ public class UserAddressServiceImpl implements UserAddressService {
     public void deleteAddress(Address address) {
         this.addressDAO.delete(address);
     }
+
+    /**
+     * <p>Creates new user account.</p>
+     *
+     * @param newUser a new user account to be created.
+     * @return created user account.
+     */
+    public User createUser(User newUser) {
+        return this.userDAO.save(newUser);
+    }
 }

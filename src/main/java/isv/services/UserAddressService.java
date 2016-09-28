@@ -41,4 +41,12 @@ public interface UserAddressService {
      * @param address a {@link Address} representing the address.
      */
     void deleteAddress(Address address);
+
+    /**
+     * <p>Creates new user account.</p>
+     *
+     * @param newUser a new user account to be created.
+     * @return created user.
+     */
+    User createUser(User newUser);
 }

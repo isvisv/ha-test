@@ -14,7 +14,9 @@
                     <listheader label="First Name" align="center" hflex="5" />
                     <listheader label="Second Name" align="center" hflex="4" />
                     <listheader label="Phone" align="center" hflex="4" />
-                    <listheader label=" " align="center" hflex="2" />
+                    <listheader align="center" hflex="2">
+                        <button label="+" id="addUserButton" onClick="@command('showAddUserDialog')"/>
+                    </listheader>
                 </listhead>
                 <template name="model" var="user">
                     <listitem>
