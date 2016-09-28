@@ -35,5 +35,6 @@ Test work
 3. To launch application on Jetty web server:
    
    `mvn jetty:run`
-   
+      
+4. To access applicaiton use URL like `http://localhost:8080/haear/index.zul`   
     
