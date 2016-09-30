@@ -3,6 +3,7 @@ Test work
 
 ## Pre-requisites
 
+    WildFly 10.1.0
     MariaDB 10.1.17
     Maven 3.3.9
     
@@ -14,27 +15,34 @@ Test work
         `mariadb-port`     - Port for MariaDB server
         `mariadb-db`       - Database name
         `mariadb-username` - Username for authenticating to database server
-        `mariadb-password` - Password for authenticating to database
+        `mariadb-password` - Password for authenticating to database server
         
-    ./src/main/resources/META-INF/persistence.xml
-    
-        `hibernate.connection.url`      - JDBC connection URL for target datagase
-        `hibernate.connection.username` - Username for authenticating to database server
-        `hibernate.connection.password` - Password for authenticating to database
+    ./ear/scr/main/resources/setup_ds.bat
+        
+        `WILDFLY_HOME`   - A path to installation directory for WildFly Server
+        `CONNECTION_URL` - A JDBC-compliant URL for datasource
+        `DB_USERNAME`    - Username for authenticating to database server
+        `DB_PASSWORD`    - Password for authenticating to database server
         
 ## Set-up instructions
 
-1. To setup DB schema and sample data:
+1. Setup DB schema and sample data:
    
-   `mvn liquibase:update`
+   `mvn liquibase:update -Pdb`
 
-2. To build the WAR archive for deployment to standalone server:
+2. Add datasource to WildFly Server configuration:
    
-   `mvn clean package`
+   `cd ear/src/main/resources`
    
-3. To launch application on Jetty web server:
+   `setup_ds.bat`
    
-   `mvn jetty:run`
+3. Build the EAR archive for deployment to WildFly Server:
+   
+   `mvn clean install`
+   
+4. Deploy EAR file to WildFly Server:
+   
+   `mvn wildfly:deploy`
       
-4. To access applicaiton use URL like `http://localhost:8080/haear/index.zul`   
+5. Access application at URL like `http://localhost:8080/haear/index.zul`   
     
