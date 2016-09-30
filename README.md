@@ -7,6 +7,13 @@ Test work
     MariaDB 10.1.17
     Maven 3.3.9
     
+## Checkout
+    
+   `git clone https://github.com/isvisv/ha-test.git .`
+   
+   `git checkout ejb-wildfly`
+   
+    
 ## Configuration
 
     ./pom.xml
@@ -26,23 +33,25 @@ Test work
         
 ## Set-up instructions
 
-1. Setup DB schema and sample data:
+1. Start WildFly Server
+
+2. Setup DB schema and sample data:
    
    `mvn liquibase:update -Pdb`
 
-2. Add datasource to WildFly Server configuration:
+3. Add datasource to WildFly Server configuration:
    
    `cd ear/src/main/resources`
    
    `setup_ds.bat`
    
-3. Build the EAR archive for deployment to WildFly Server:
+4. Build the EAR archive for deployment to WildFly Server:
    
    `mvn clean install`
    
-4. Deploy EAR file to WildFly Server:
+5. Deploy EAR file to WildFly Server:
    
    `mvn wildfly:deploy`
       
-5. Access application at URL like `http://localhost:8080/haear/index.zul`   
+6. Access application at URL like `http://localhost:8080/haear/index.zul`   
     

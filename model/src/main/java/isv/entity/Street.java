@@ -23,7 +23,7 @@ public class Street extends IdentifiableEntity implements Serializable {
     /**
      * <p>A <code>Long</code> providing the value for CityId property.</p>
      */
-    @Column(nullable = false)
+    @Column(name="city_id", nullable = false)
     private Long cityId;
 
     /**
