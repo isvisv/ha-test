@@ -48,6 +48,7 @@ Test work
 4. Build the EAR archive for deployment to WildFly Server:
    
    `cd ../../../..`
+   
    `mvn clean install`
    
 5. Deploy EAR file to WildFly Server:
