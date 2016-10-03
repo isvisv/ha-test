@@ -22,7 +22,7 @@ import javax.naming.InitialContext;
  * @author isv
  * @version 1.0
  */
-@VariableResolver(org.zkoss.zkplus.cdi.DelegatingVariableResolver.class)
+@VariableResolver(org.zkoss.zkplus.jndi.JndiVariableResolver.class)
 public class NewUserController extends SelectorComposer<Component> {
 
     private static final long serialVersionUID = 1L;
@@ -45,17 +45,8 @@ public class NewUserController extends SelectorComposer<Component> {
     /**
      * <p>A {@link UserAddressServiceEJB} to be used for managing user accounts and addresses/</p>
      */
-    @WireVariable
+    @WireVariable("UserAddressServiceEJB")
     private UserAddressServiceEJB userAddressService;
-
-    @Override
-    public void doAfterCompose(Component comp) throws Exception {
-        super.doAfterCompose(comp);
-        if (userAddressService == null) {
-            Context ctx = new InitialContext();
-            userAddressService = (UserAddressServiceEJB) ctx.lookup("java:module/UserAddressServiceEJB");
-        }
-    }
 
     /**
      * <p>Closes the <code>Add User</code> modal dialog window.</p>

@@ -7,7 +7,6 @@ import isv.entity.User;
 
 import javax.ejb.*;
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +16,8 @@ import java.util.List;
  * @author isv
  * @version 1.0
  */
-@Stateless
+@Stateless(mappedName = "java:comp/env/UserAddressServiceEJB", name="UserAddressServiceEJB")
 @TransactionManagement(TransactionManagementType.CONTAINER)
-//@Named("userAddressService")
 public class UserAddressServiceEJB {
 
     /**

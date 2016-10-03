@@ -24,13 +24,13 @@ import java.util.List;
  * @author isv
  * @version 1.0
  */
-@VariableResolver(org.zkoss.zkplus.cdi.DelegatingVariableResolver.class)
+@VariableResolver(org.zkoss.zkplus.jndi.JndiVariableResolver.class)
 public class UserAddressViewModel {
 
     /**
      * <p>A {@link UserAddressServiceEJB} to be used for managing user accounts and addresses/</p>
      */
-    @WireVariable
+    @WireVariable("UserAddressServiceEJB")
     private UserAddressServiceEJB userAddressService;
 
     /**
@@ -65,11 +65,6 @@ public class UserAddressViewModel {
      */
     @Init
     public void init() throws NamingException {
-        if (userAddressService == null) {
-            Context ctx = new InitialContext();
-            userAddressService = (UserAddressServiceEJB) ctx.lookup("java:module/UserAddressServiceEJB");
-        }
-
         loadData();
     }
 
