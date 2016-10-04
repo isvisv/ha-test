@@ -1,3 +1,4 @@
+<?page title="Test Work"?>
 <zk>
     <window apply="org.zkoss.bind.BindComposer"
             viewModel="@id('vm')@init('isv.UserAddressViewModel')"
@@ -43,7 +44,9 @@
                     <listheader label="Street" align="center" hflex="3"/>
                     <listheader label="House" align="center" hflex="4"/>
                     <listheader label="Flat" align="center" hflex="4"/>
-                    <listheader label=" " align="center" hflex="2"/>
+                    <listheader align="center" hflex="2">
+                        <button label="+" id="addAddressButton" onClick="@command('showAddAddressDialog')"/>
+                    </listheader>
                 </listhead>
                 <template name="model" var="address">
                     <listitem>

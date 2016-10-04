@@ -3,6 +3,8 @@ package isv.ejb;
 import isv.dao.AddressDAO;
 import isv.dao.UserDAO;
 import isv.entity.Address;
+import isv.entity.City;
+import isv.entity.Street;
 import isv.entity.User;
 
 import javax.ejb.*;
@@ -18,6 +20,7 @@ import java.util.List;
  */
 @Stateless(mappedName = "java:comp/env/UserAddressServiceEJB", name="UserAddressServiceEJB")
 @TransactionManagement(TransactionManagementType.CONTAINER)
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class UserAddressServiceEJB {
 
     /**
@@ -43,7 +46,6 @@ public class UserAddressServiceEJB {
      *
      * @return a {@link List} listing the user accounts or empty list if there are no user accounts.
      */
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public List<User> getUsers() {
         List<User> users = this.userDAO.queryAll();
         if (users == null) {
@@ -58,7 +60,6 @@ public class UserAddressServiceEJB {
      * @param userId a {@link Long} providing the ID referencing the user.
      * @return a {@link List} listing the addresses for user.
      */
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public List<Address> getUserAddresses(Long userId) {
         return this.addressDAO.queryByUserId(userId);
     }
@@ -68,7 +69,6 @@ public class UserAddressServiceEJB {
      *
      * @param user a {@link User} representing the user.
      */
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void deleteUser(User user){
         this.addressDAO.deleteByUserId(user.getId());
         this.userDAO.delete(user);
@@ -79,7 +79,6 @@ public class UserAddressServiceEJB {
      *
      * @param address a {@link Address} representing the address.
      */
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void deleteAddress(Address address) {
         this.addressDAO.delete(address);
     }
@@ -90,9 +89,36 @@ public class UserAddressServiceEJB {
      * @param newUser a new user account to be created.
      * @return created user account.
      */
-    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public User createUser(User newUser) {
         return this.userDAO.save(newUser);
     }
 
+    /**
+     * <p>Gets the list of all existing cities.</p>
+     *
+     * @return a list of existing cities.
+     */
+    public List<City> getAllCities() {
+        return this.addressDAO.getAllCities();
+    }
+
+    /**
+     * <p>Creates new user address.</p>
+     *
+     * @param newAddress a new address to be created.
+     * @return created user address.
+     */
+    public Address createAddress(Address newAddress) {
+        return this.addressDAO.save(newAddress);
+    }
+
+    /**
+     * <p>Gets the streets for the specified city.</p>
+     *
+     * @param cityId a city ID to get the streets for.
+     * @return a list of city streets.
+     */
+    public List<Street> getStreetsByCity(Long cityId) {
+        return this.addressDAO.getStreetsByCity(cityId);
+    }
 }

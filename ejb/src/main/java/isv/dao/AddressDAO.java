@@ -1,6 +1,8 @@
 package isv.dao;
 
 import isv.entity.Address;
+import isv.entity.City;
+import isv.entity.Street;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -64,5 +66,31 @@ public class AddressDAO extends AbstractDAO<Address> {
      */
     public void delete(Address address) {
         deleteEntity(address);
+    }
+
+    /**
+     * <p>Gets the list of all existing cities.</p>
+     *
+     * @return a list of existing cities.
+     */
+    @SuppressWarnings("unchecked")
+    public List<City> getAllCities() {
+        EntityManager em = getEntityManager();
+        Query query = em.createQuery("SELECT c FROM City c ORDER BY c.name");
+        return (List<City>) query.getResultList();
+    }
+
+    /**
+     * <p>Gets the streets for the specified city.</p>
+     *
+     * @param cityId a city ID to get the streets for.
+     * @return a list of city streets.
+     */
+    @SuppressWarnings("unchecked")
+    public List<Street> getStreetsByCity(Long cityId) {
+        EntityManager em = getEntityManager();
+        Query query = em.createQuery("SELECT s FROM Street s WHERE s.cityId = :cityId ORDER BY s.name");
+        query.setParameter("cityId", cityId);
+        return (List<Street>) query.getResultList();
     }
 }

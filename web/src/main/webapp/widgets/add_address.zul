@@ -1,0 +1,36 @@
+<window id="newAddressWin" title="Add Address" width="400px" border="normal" apply="isv.NewAddressController">
+    <grid>
+        <rows>
+            <row>
+                Zip Code:
+                <textbox id="zipCodeTextBox" value="" maxlength="15"/>
+            </row>
+            <row>
+                City:
+                <combobox id="citiesCombobox" autodrop="true" constraint="no empty">
+                    <template name="model">
+                        <comboitem label="${each}" />
+                    </template>
+                </combobox>
+            </row>
+            <row>
+                Street:
+                <combobox id="streetsCombobox" autodrop="true" constraint="no empty">
+                    <template name="model">
+                        <comboitem label="${each}" />
+                    </template>
+                </combobox>
+            </row>
+            <row>
+                House:
+                <textbox id="houseTextBox" value="" constraint="no empty" maxlength="10"/>
+            </row>
+            <row>
+                Flat:
+                <textbox id="flatTextBox" value="" maxlength="10"/>
+            </row>
+        </rows>
+    </grid>
+    <button id="submitAddressButton" label="Submit"/>
+    <button id="cancelAddressButton" label="Cancel" />
+</window>
