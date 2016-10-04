@@ -1,6 +1,7 @@
 package isv.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import java.io.Serializable;
 
 /**
@@ -10,15 +11,9 @@ import java.io.Serializable;
  * @version 1.0
  */
 @Entity
-public class Street extends IdentifiableEntity implements Serializable {
+public class Street extends NamedEntity implements Serializable {
 
     private static final long serialVersionUID = 4L;
-
-    /**
-     * <p>A <code>String</code> providing the value for Name property.</p>
-     */
-    @Column(name = "name", nullable = false)
-    private String name;
 
     /**
      * <p>A <code>Long</code> providing the value for CityId property.</p>
@@ -48,24 +43,6 @@ public class Street extends IdentifiableEntity implements Serializable {
      */
     public void setCityId(Long cityId) {
         this.cityId = cityId;
-    }
-
-    /**
-     * <p>Gets the Name property.</p>
-     *
-     * @return a <code>String</code> providing the value for Name property.
-     */
-    public String getName() {
-        return this.name;
-    }
-
-    /**
-     * <p>Sets the Name property.</p>
-     *
-     * @param name a <code>String</code> providing the value for Name property.
-     */
-    public void setName(String name) {
-        this.name = name;
     }
 
 }

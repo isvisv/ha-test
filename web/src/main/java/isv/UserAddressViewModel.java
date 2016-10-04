@@ -13,8 +13,6 @@ import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModelList;
 import org.zkoss.zul.Window;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import java.util.List;
 
@@ -154,7 +152,7 @@ public class UserAddressViewModel {
      */
     private void loadData() {
         List<User> userList = userAddressService.getUsers();
-        userListModelList = new ListModelList<User>(userList);
+        userListModelList = new ListModelList<>(userList);
         if (!userList.isEmpty()) {
             setSelectedUser(userList.get(0));
         } else {
@@ -169,7 +167,7 @@ public class UserAddressViewModel {
     private void loadSelectedUserAddresses() {
         if (selectedUser != null) {
             List<Address> userAddresses = userAddressService.getUserAddresses(selectedUser.getId());
-            this.addressListModelList = new ListModelList<Address>(userAddresses);
+            this.addressListModelList = new ListModelList<>(userAddresses);
             if (!userAddresses.isEmpty()) {
                 setSelectedAddress(userAddresses.get(0));
             }
@@ -184,6 +182,19 @@ public class UserAddressViewModel {
     @Command
     public void showAddUserDialog() {
         String template = "/widgets/add_user.zul";
+        Window window = (Window) Executions.createComponents(template, null, null);
+        window.doModal();
+    }
+
+    /**
+     * <p>Shows modal dialog for adding new user address.</p>
+     */
+    @Command
+    public void showAddAddressDialog() {
+        // Pass current user as argument so that address could be bound properly to user account
+        ExecutionContext.setSelectedUser(this.selectedUser);
+
+        String template = "/widgets/add_address.zul";
         Window window = (Window) Executions.createComponents(template, null, null);
         window.doModal();
     }
