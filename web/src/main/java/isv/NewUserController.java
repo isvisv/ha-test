@@ -13,6 +13,7 @@ import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
 
+import javax.ejb.EJB;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 
@@ -45,7 +46,7 @@ public class NewUserController extends SelectorComposer<Component> {
     /**
      * <p>A {@link UserAddressServiceEJB} to be used for managing user accounts and addresses/</p>
      */
-    @WireVariable("UserAddressServiceEJB")
+    @WireVariable
     private UserAddressServiceEJB userAddressService;
 
     /**

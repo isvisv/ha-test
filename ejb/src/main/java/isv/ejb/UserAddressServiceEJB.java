@@ -18,7 +18,9 @@ import java.util.List;
  * @author isv
  * @version 1.0
  */
-@Stateless(mappedName = "java:comp/env/UserAddressServiceEJB", name="UserAddressServiceEJB")
+//@Stateless(mappedName = "java:comp/env/UserAddressServiceEJB", name="UserAddressServiceEJB")
+//@Stateless(name="UserAddressServiceEJB")
+@Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class UserAddressServiceEJB {
